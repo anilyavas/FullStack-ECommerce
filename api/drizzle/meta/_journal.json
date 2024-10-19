@@ -8,6 +8,13 @@
       "when": 1729089942337,
       "tag": "0000_yellow_cargill",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1729252303682,
+      "tag": "0001_puzzling_stryfe",
+      "breakpoints": true
     }
   ]
 }
