@@ -55,6 +55,7 @@ router.post('/login', validateData(loginSchema), async (req, res) => {
       return;
     }
 
+    // create a jwt token
     const token = generateUserToken(user);
     // @ts-ignore
     delete user.password;
