@@ -15,6 +15,13 @@
       "when": 1729252303682,
       "tag": "0001_puzzling_stryfe",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1729417918769,
+      "tag": "0002_elite_dust",
+      "breakpoints": true
     }
   ]
 }
