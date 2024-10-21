@@ -8,7 +8,7 @@ export default function HomeScreen() {
       contentContainerClassName='gap-2'
       columnWrapperClassName='gap-2'
       data={products}
-      renderItem={({ item }) => <ProductListItem item={item} />}
+      renderItem={({ item }) => <ProductListItem product={item} />}
       numColumns={2}
     />
   );
