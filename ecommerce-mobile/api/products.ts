@@ -10,7 +10,7 @@ export async function listProducts() {
 }
 
 export async function fetchProductById(id: number) {
-  const res = await fetch(`${API_URL}/product/${id}`);
+  const res = await fetch(`${API_URL}/products/${id}`);
   const data = await res.json();
   if (!res.ok) {
     throw new Error('Error');
