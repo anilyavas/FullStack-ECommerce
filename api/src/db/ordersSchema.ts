@@ -14,6 +14,7 @@ export const ordersTable = pgTable('orders', {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   createdAt: timestamp().notNull().defaultNow(),
   status: varchar({ length: 50 }).notNull().default('New'),
+
   userId: integer()
     .references(() => usersTable.id)
     .notNull(),
@@ -27,6 +28,7 @@ export const orderItemsTable = pgTable('order_items', {
   productId: integer()
     .references(() => productsTable.id)
     .notNull(),
+
   quantity: integer().notNull(),
   price: doublePrecision().notNull(),
 });
@@ -37,16 +39,17 @@ export const insertOrderSchema = createInsertSchema(ordersTable).omit({
   status: true,
   createdAt: true,
 });
+
 export const insertOrderItemSchema = createInsertSchema(orderItemsTable).omit({
   id: true,
   orderId: true,
 });
 
 export const insertOrderWithItemsSchema = z.object({
-  order: createInsertSchema(ordersTable),
+  order: insertOrderSchema,
   items: z.array(insertOrderItemSchema),
 });
 
-export const updateOrderSchema = createInsertSchema(ordersTable).omit({
+export const updateOrderSchema = createInsertSchema(ordersTable).pick({
   status: true,
 });
