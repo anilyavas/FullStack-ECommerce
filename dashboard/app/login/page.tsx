@@ -8,31 +8,19 @@ import { HStack } from '@/components/ui/hstack';
 import { Button, ButtonText } from '@/components/ui/button';
 import { useState } from 'react';
 import { Box } from '@/components/ui/box';
-import { login, register } from '@/api/auth';
+import { handleLogin, handleSignup } from './actions';
+import { useSearchParams } from 'next/navigation';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const onLogin = async () => {
-    try {
-      await login(email, password);
-    } catch (e) {
-      alert('Failed to login');
-    }
-  };
-  const onSignup = async () => {
-    try {
-      await register(email, password);
-    } catch (e) {
-      alert('Failed to signup');
-    }
-  };
+  const searchParams = useSearchParams();
+  const errorMessage = searchParams.get('errorMessage');
 
   return (
     <Box className='flex-1 min-h-screen justify-center items-center'>
       <FormControl
-        isInvalid={false}
+        isInvalid={!!errorMessage}
         className='bg-white m-2 p-4  w-full max-w-[500px] border rounded-lg border-outline-300'
       >
         <VStack space='xl'>
@@ -55,11 +43,19 @@ export default function LoginPage() {
               />
             </Input>
           </VStack>
+          {errorMessage && <Text className='text-red-500'>{errorMessage}</Text>}
           <HStack space='sm'>
-            <Button className='flex-1' variant='outline' onPress={onSignup}>
+            <Button
+              className='flex-1'
+              variant='outline'
+              onPress={() => handleSignup(email, password)}
+            >
               <ButtonText>Sign up</ButtonText>
             </Button>
-            <Button className='flex-1' onPress={onLogin}>
+            <Button
+              className='flex-1'
+              onPress={() => handleLogin(email, password)}
+            >
               <ButtonText>Sign in</ButtonText>
             </Button>
           </HStack>
